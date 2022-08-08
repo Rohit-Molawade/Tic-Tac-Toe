@@ -1,57 +1,76 @@
 @font-face {
-    font-family: blanka;
-    src: url(/assets/fonts/blanka/Blanka-Regular.otf);
+  font-family: blanka;
+  src: url(/assets/fonts/blanka/Blanka-Regular.otf);
 }
 
-html,body{
-    height: 100%;
-    margin: 0;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
 
-.main-container{
-    height: 100vh;
+.main-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+  grid-template-rows: auto;
+  background-color: black;
+}
+
+.header-col {
+  border: 3px white solid;
+  display: grid;
+  grid-template-rows: 2fr 4fr;
+}
+
+.header-col > div {
+  background-color: black;
+}
+
+.title {
+  padding: 10px 120px;
+}
+
+span {
+  margin: 0;
+  font-family: "blanka", "san-serif";
+  color: white;
+  font-size: 3rem;
+}
+
+span:nth-child(2) {
+  padding-left: 50px;
+}
+
+span:nth-child(3) {
+  padding-left: 100px;
+}
+
+.gameboard-col {
+  background-color: black;
+  border: 3px white solid;
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+}
+
+.gameboard-col > div {
+  border: 1px white solid;
+}
+
+.gameboard{
     display: grid;
-    grid-template-columns: 2fr 4fr;
-    grid-template-rows: auto;
-    background-color: black;
+    justify-content: center;
+    align-items: center;
 }
 
-.header-col{
-    border: 3px white solid;
+#board{
     display: grid;
-    grid-template-rows: 2fr 4fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
-.header-col > div{
-    background-color: black;
-}
-
-.title{
-    padding: 10px 120px;
-}
-
-span{
-    margin: 0;
-    font-family: 'blanka', 'san-serif';
-    color: white;
-    font-size: 3rem;
-}
-
-span:nth-child(2){
-    padding-left: 50px;
-}
-
-span:nth-child(3){
-    padding-left: 100px;
-}
-
-.gameboard-col{
-    background-color: black;
-    border: 3px white solid;
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-}
-
-.gameboard-col > div{
+#board > div{
     border: 1px white solid;
+    height: 130px;
+    width: 130px;
 }
