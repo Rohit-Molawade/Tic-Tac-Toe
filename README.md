@@ -1,2 +1,2 @@
 # Tic-Tac-Toe
-A simple tic tac tor game for the odin project
+A simple tic tac toe game for the odin project
