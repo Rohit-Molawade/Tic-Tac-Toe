@@ -3,10 +3,16 @@
   src: url(/assets/fonts/blanka/Blanka-Regular.otf);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 html,
 body {
   height: 100%;
   margin: 0;
+}
+
+*{
+    font-family: 'blanka','sans-serif';
 }
 
 .main-container {
@@ -31,19 +37,51 @@ body {
   padding: 10px 120px;
 }
 
-span {
+.title > span {
   margin: 0;
   font-family: "blanka", "san-serif";
   color: white;
   font-size: 3rem;
 }
 
-span:nth-child(2) {
+.title > span:nth-child(2) {
   padding-left: 50px;
 }
 
-span:nth-child(3) {
+.title > span:nth-child(3) {
   padding-left: 100px;
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0px;
+}
+
+.player-names,.symbol{
+    display: flex;   
+    gap: 50px;
+}
+
+.player-names > span{
+    margin: 0;
+    font-family: 'Roboto','sans-serif';
+    color: white;
+    font-size: 1.5rem;
+    padding: 20px;
+}
+
+.symbol > span{
+    margin: 0;
+    font-family: 'Roboto','sans-serif';
+    color: white;
+    font-size: 2rem;
+    padding: 20px;
+}
+
+.symbol > span:nth-child(1){
+    padding-right: 100px;
 }
 
 .gameboard-col {
@@ -55,6 +93,35 @@ span:nth-child(3) {
 
 .gameboard-col > div {
   border: 1px white solid;
+}
+
+.status{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#start{
+    appearance: none;
+    outline: none;
+    width: 100px;
+    margin-right: 80px;
+    height: 40px;
+    background-color: black;
+    border: 1px white solid;
+    color: white;
+    font-family: 'Roboto','sans-serif';
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#start:hover{
+    background-color: white;
+    color: black;
+}
+
+#start:active{
+    box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.6);
 }
 
 .gameboard{
@@ -73,4 +140,18 @@ span:nth-child(3) {
     border: 1px white solid;
     height: 130px;
     width: 130px;
+}
+
+.cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.X,.O{
+    margin: 0;
+    font-family: 'Roboto','sans-serif';
+    color: white;
+    font-size: 4rem;
+    padding: 20px;
 }
