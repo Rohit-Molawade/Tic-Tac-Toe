@@ -156,8 +156,8 @@ body {
     padding: 20px;
 }
 
-.win-container{
-    position: absolute;
+#win-container{
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -167,16 +167,35 @@ body {
     display: none;
 }
 
-.back{
+#back{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column-reverse;
     height: 100vh;
 }
 
-.win-msg > span{
+#back > span{
     font-size: 3rem;
     padding: 50px;
     color: rgba(255, 245, 238, 0.9);
     letter-spacing: 0.5rem;
+}
+
+#back > button{
+    appearance: none;
+    outline: none;
+    width: 100px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px white solid;
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Roboto','sans-serif';
+    align-self: center;
+}
+
+#back > button:hover{
+    background-color: white;
+    color: black;
 }

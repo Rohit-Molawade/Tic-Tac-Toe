@@ -1,11 +1,12 @@
 let start = document.getElementById("start");
+let restart = document.getElementById("restart");
 
 ////////////////////////////////Game Board Module\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 let gameboard = (function () {
   let _game_board = [
-    ["x1", "x2", "x3"],
-    ["y1", "y2", "y3"],
-    ["z1", "z2", "z3"],
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"],
   ];
   let _gameboard_container = document.getElementById("board");
   let _count = 0;
@@ -20,6 +21,26 @@ let gameboard = (function () {
         div.dataset.checked = "false";
         _gameboard_container.appendChild(div);
       });
+    });
+  }
+
+  function refresh_board() {
+    let count = 0;
+    for (let i = 0; i < _game_board.length; i++) {
+      for (let j = 0; j < _game_board.length; j++) {
+        ++count;
+        _game_board[i][j] = count.toString();
+      }
+    }
+  }
+
+  function refresh_symbol() {
+    let board = document.getElementsByClassName("cell"); //Get a NodeList of all cells
+    let board_array = Array.from(board); //Convert Node list to Array
+
+    board_array.forEach((cell) => {
+      cell.dataset.checked = "false";
+      if (cell.firstChild !== null) cell.removeChild(cell.firstChild);
     });
   }
 
@@ -38,7 +59,7 @@ let gameboard = (function () {
     div.appendChild(span);
     div.dataset.checked = "true";
     _game_board[array[0]][array[1]] = symbol;
-    check_win(symbol);
+    _check_win(symbol);
   }
 
   function select(e, chance) {
@@ -53,7 +74,7 @@ let gameboard = (function () {
     }
   }
 
-  function check_win(symbol) {
+  function _check_win(symbol) {
     _count++;
     let _row = 0,
       _col = 0,
@@ -79,20 +100,26 @@ let gameboard = (function () {
         (_col === _win || _row === _win || _dr === _win || _dl === _win) &&
         symbol === "X"
       ) {
-        alert("Player 1 WON!");
+        display_controller.display_winner("Player 1");
+        _count = 0;
         return true;
       } else if (
         (_col === _win || _row === _win || _dr === _win || _dl === _win) &&
         symbol === "O"
       ) {
-        alert("Player 2 WON!");
+        display_controller.display_winner("Player 2");
+        _count = 0;
+        return true;
+      } else if (_count >= 9) {
+        display_controller.display_winner("Match Tied");
+        _count = 0;
         return true;
       }
       _row = 0;
     }
   }
 
-  return { generate_board, select };
+  return { generate_board, select, refresh_board, refresh_symbol };
 })();
 
 //////////////////////////////////////Player Factory Function\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -112,7 +139,8 @@ let player2 = player;
 ////////////////////////////////Display Module\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 let display_controller = (function () {
   let _chance = "X";
-
+  let _win_container = document.getElementById("win-container");
+  let _back = document.getElementById("back");
   function get_chance() {
     return _chance;
   }
@@ -121,7 +149,28 @@ let display_controller = (function () {
     if (_chance === "X") _chance = "O";
     else if (_chance === "O") _chance = "X";
   }
-  return { get_chance, toggle_chance };
+
+  function refresh_chance() {
+    _chance = "X";
+  }
+
+  function display_winner(winner) {
+    let msg = document.createElement("span");
+    if (winner === "Match Tied") msg.textContent = `${winner}`;
+    else msg.textContent = `${winner} Won!!!`;
+    _back.appendChild(msg);
+    _win_container.style.display = "block";
+  }
+
+  function restart_game() {
+    _win_container.style.display = "none";
+    _back.removeChild(_back.lastChild);
+    gameboard.refresh_board();
+    gameboard.refresh_symbol();
+    refresh_chance();
+  }
+
+  return { get_chance, toggle_chance, display_winner, restart_game };
 })();
 
 start.addEventListener("click", () => {
@@ -139,3 +188,5 @@ board_array.forEach((cell) => {
     gameboard.select(e, display_controller.get_chance());
   });
 });
+
+restart.addEventListener("click", display_controller.restart_game);
